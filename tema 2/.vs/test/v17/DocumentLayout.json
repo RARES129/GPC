@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DASCALU ELENA\\Desktop\\Chestii RARES\\GPC\\tema 2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B23A1767-A8F6-473F-A800-586808D558ED}|test.vcxproj|C:\\Users\\DASCALU ELENA\\Desktop\\Chestii RARES\\GPC\\tema 2\\t02p1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B23A1767-A8F6-473F-A800-586808D558ED}|test.vcxproj|solutionrelative:t02p1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "t02p1.cpp",
+              "DocumentMoniker": "C:\\Users\\DASCALU ELENA\\Desktop\\Chestii RARES\\GPC\\tema 2\\t02p1.cpp",
+              "RelativeDocumentMoniker": "t02p1.cpp",
+              "ToolTip": "C:\\Users\\DASCALU ELENA\\Desktop\\Chestii RARES\\GPC\\tema 2\\t02p1.cpp",
+              "RelativeToolTip": "t02p1.cpp",
+              "ViewState": "AQIAALQAAAAAAAAAAAAIwMIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-10T01:14:58.091Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
