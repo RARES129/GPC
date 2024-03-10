@@ -162,7 +162,7 @@ void Display2() {
 
 
    /**********************************
-      For this example, the computation of the scaling factors
+      For this example, the computa3tion of the scaling factors
       is not needed. Because x is in the interval [0, 8pi]
       the scaling factor for x is 8pi because x/(8pi) is in
       [0,1]. In the case of the exponential function we know
@@ -182,29 +182,68 @@ void Display2() {
    glEnd();
 }
 
-// Function to compute distance from x to the nearest integer
 double distanceToNearestInteger(double x) {
     double fractionalPart = x - floor(x);
     return fmin(fractionalPart, 1.0 - fractionalPart);
 }
 
-// The graph of the function 1 for x=0, d(x)/x for 0<x<=100
 void Display3() {
-    double xmax = 100.0;
+    double xmax = 30.0;
     double ymax = 1.0; 
+    
 
     glColor3f(1,0.1,0.1);
 
     glBegin(GL_LINE_STRIP);
-    // Plot the point for x=0
-    glVertex2f(0.0, 1.0); // x=0, y=1
-    // Plot points for 0 < x <= 100
+
+    glVertex2f(0.0, 1.0);
     for (double x = 0.05; x <= xmax; x += 0.05) {
         double y = distanceToNearestInteger(x) / x;
         glVertex2f(x / xmax, y / ymax);
     }
     glEnd();
 }
+
+void Display4() {
+    const auto ratio = 0.005;
+    const auto a = 0.2;
+    double ys[250], xs[250];
+    double pi = 4 * atan(1.0);
+    auto t = -pi / 2 + ratio;
+    auto n = 0;
+
+    glColor3f(0.0, 0.0, 0.0);
+    glBegin(GL_LINE_STRIP);
+    while (true) {
+
+        if (t >= -pi / 6) break;
+
+        const auto output_x = a / (4 * cos(t) * cos(t) - 3);
+        const auto output_y = (a * tan(t)) / (4 * cos(t) * cos(t) - 3);
+
+        xs[n] = output_x;
+        ys[n] = output_y;
+        n++;
+
+        t += ratio;
+
+        glVertex2f(output_x, output_y);
+    }
+    glEnd();
+
+    glColor3f(1, 0.1, 0.1);
+    glBegin(GL_TRIANGLES);
+    for (auto i = 1; i < n - 1; i += 3) {
+
+        if (i > n / 4 && i < 3 * n / 4) continue;
+
+        glVertex2f(-1.0, 1.0);
+        glVertex2f(xs[i], ys[i]);
+        glVertex2f(xs[i + 1], ys[i + 1]);
+    }
+    glEnd();
+}
+
 
 
 
@@ -232,6 +271,8 @@ void Display(void) {
    case '3':
        Display3(); // Add this case for Display3()
        break;
+   case '4': 
+       Display4(); // Add this case for Display4()
    default:
       break;
    }
