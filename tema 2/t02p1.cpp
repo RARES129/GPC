@@ -244,6 +244,87 @@ void Display4() {
     glEnd();
 }
 
+void Display5() {
+    double a = 0.1, b = 0.2;
+    double xmax, ymax, xmin, ymin;
+    double ratia = 0.05;
+    double t;
+    xmax = 1.2;
+    xmin = 1;
+    ymax = ymin = 1;
+    xmax = (fabs(xmax) > fabs(xmin)) ? fabs(xmax) : fabs(xmin);
+    ymax = (fabs(ymax) > fabs(ymin)) ? fabs(ymax) : fabs(ymin);
+    glColor3f(1, 0.1, 0.1); // rosu
+    glBegin(GL_LINE_STRIP);
+    // am ales acest interval ca sa nu fie prea lunga (sa fie exact ca in imagine)
+    for (t = -10; t < 10; t += ratia) {
+        double x1, y1;
+        x1 = (a * t - b * sin(t)) / xmax;
+        y1 = (a - b * cos(t)) / ymax;
+
+        glVertex2f(x1, y1);
+    }
+    glEnd();
+}
+
+//lemniscata lui bernouli
+void Display6() {
+    double a = 0.4;
+    double pi = 4 * atan(1.0);
+    double ratia = 0.01;
+    double t;
+    double x1, y1, x2, y2;
+    glColor3f(1, 0.1, 0.1); // rosu
+    glBegin(GL_LINE_STRIP);
+    for (t = -pi / 4 + ratia; t < pi / 4; t += ratia) {
+        double r, x, y;
+        r = a * sqrt(2 * cos(2 * t));
+        x = r * cos(t);
+        y = r * sin(t);
+        if (t == -pi / 4 + ratia) {
+            x1 = x;
+            y1 = y;
+        }
+        glVertex2f(x, y);
+    }
+    glEnd();
+    glColor3f(1, 0.1, 0.1); // rosu
+    glBegin(GL_LINE_STRIP);
+    for (t = -pi / 4 + ratia; t < pi / 4; t += ratia) {
+        double r, x, y;
+        r = -(a * sqrt(2 * cos(2 * t)));
+        x = r * cos(t);
+        y = r * sin(t);
+        if (t == -pi / 4 + ratia) {
+            x2 = x;
+            y2 = y;
+        }
+        glVertex2f(x, y);
+    }
+    glEnd();
+    glColor3f(1, 0.1, 0.1); // rosu
+    glBegin(GL_LINE_STRIP);
+    glVertex2f(x2, y2);
+    glVertex2f(x1, y1);
+    glEnd();
+}
+
+//spirala logaritmica
+void Display7() {
+    double a = 0.02;
+    double ratia = 0.05;
+    double t;
+    glColor3f(1, 0.1, 0.1); // rosu
+    glBegin(GL_LINE_STRIP);
+    for (t = 0; t < 100; t += ratia) {
+        double r, x, y;
+        r = a * exp(1 + t);
+        x = r * cos(t);
+        y = r * sin(t);
+        glVertex2f(x, y);
+    }
+    glEnd();
+}
 
 
 
@@ -269,10 +350,19 @@ void Display(void) {
       Display2();
       break;
    case '3':
-       Display3(); // Add this case for Display3()
+       Display3();
        break;
    case '4': 
-       Display4(); // Add this case for Display4()
+       Display4();
+       break;
+   case '5':
+       Display5();
+       break;
+   case '6':
+       Display6();
+       break;
+   case '7':
+       Display7();
    default:
       break;
    }
