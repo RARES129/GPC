@@ -203,7 +203,7 @@ void Display3() {
     }
     glEnd();
 }
-
+//The trisectrix of Longchamps
 void Display4() {
     const auto ratio = 0.005;
     const auto a = 0.2;
@@ -244,24 +244,20 @@ void Display4() {
     glEnd();
 }
 
+//The cycloid
 void Display5() {
     double a = 0.1, b = 0.2;
-    double xmax, ymax, xmin, ymin;
+    double xmax, ymax;
     double ratia = 0.05;
     double t;
     xmax = 1.2;
-    xmin = 1;
-    ymax = ymin = 1;
-    xmax = (fabs(xmax) > fabs(xmin)) ? fabs(xmax) : fabs(xmin);
-    ymax = (fabs(ymax) > fabs(ymin)) ? fabs(ymax) : fabs(ymin);
+    ymax = 1;
     glColor3f(1, 0.1, 0.1); // rosu
     glBegin(GL_LINE_STRIP);
-    // am ales acest interval ca sa nu fie prea lunga (sa fie exact ca in imagine)
     for (t = -10; t < 10; t += ratia) {
         double x1, y1;
         x1 = (a * t - b * sin(t)) / xmax;
         y1 = (a - b * cos(t)) / ymax;
-
         glVertex2f(x1, y1);
     }
     glEnd();
