@@ -66,9 +66,9 @@ public:
     int isIn(const CComplex& c) const
     {
         CComplex z(0, 0);
-        for (int i = 0; i < 15; ++i) {
+        for (int i = 0; i < nriter; ++i) {
             z = z.pow2() + c;
-            if (z.getModul() > 2)  // Check if modulus exceeds 2
+            if (z.getModul() > modmax)
                 return i;
         }
         return nriter;
@@ -82,15 +82,28 @@ public:
                 CComplex c(x, y);
                 int iter = isIn(c);
                 if (iter == nriter) {
-                    glColor3f(1.0f, 0.0f, 0.0f); // Inside: Red
-                    glVertex2d(x + 0.52, y);
+                    glColor3f(0.0f, 0.0f, 0.0f);
                 }
                 else {
-                    // Map iteration count to a color
-                    float hue = (float)iter / (float)nriter;
-                    glColor3f(1.0f - hue, 1.0f - hue, 1.0f - hue); // Gradient from red to white
-                    glVertex2d(x + 0.52, y);
+                    float normalizedIter = (float)iter / (float)nriter;
+                    float colorR, colorG, colorB;
+
+                    if (normalizedIter < 0.5f) {
+                        colorR = 2.0f * normalizedIter; 
+                        colorG = 0.0f; 
+                    }
+                    else {
+                        colorR = 1.0f; 
+                        colorG = 4.0f * (normalizedIter - 0.5f); 
+                        if (colorG > 1.0f) {
+                            colorG = 1.0f; 
+                        }
+                    }
+                    colorB = 1.0f - normalizedIter; 
+
+                    glColor3f(colorR, colorG, colorB);
                 }
+                glVertex2d(x, y);
             }
         }
         glEnd();
@@ -360,6 +373,7 @@ public:
         v.deseneaza(p, lungime);
         p1 = v.getDest(p, lungime);
         tree(lungime, nivel - 1, p1, v);
+        tree(lungime, nivel - 1, p1, v);
 
         v.rotatie(-70);
         v.deseneaza(p, lungime);
@@ -393,8 +407,13 @@ public:
 };
 
 void Display1() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+    glOrtho(-2.0, 1.0, -1.5, 1.5, -1.0, 1.0);
+
     MandelbrotSet mandelbrot;
-    mandelbrot.display(-2, -1.5, 1, 1.5); 
+    mandelbrot.display(-2.0, -1.5, 1.0, 1.5);
+    glFlush();
 }
 
 void Display2() {
@@ -581,8 +600,12 @@ void Reshape(int w, int h)
 void KeyboardFunc(unsigned char key, int x, int y)
 {
     prevKey = key;
-    if (key == 27)
+    if (key == '1') {
+        Display1();
+    }
+    else if (key == 27) {
         exit(0);
+    }
     glutPostRedisplay();
 }
 
