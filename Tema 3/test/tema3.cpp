@@ -9,8 +9,8 @@
 #include "glut.h"
 
 #define dim 300
-#define NRITER_M 1000 
-#define MODMAX_M 4
+#define NRITER_M 20
+#define MODMAX_M 2
 #define RX_M 0.005
 #define RY_M 0.005
 
@@ -94,12 +94,12 @@ public:
                     }
                     else {
                         colorR = 1.0f; 
-                        colorG = 4.0f * (normalizedIter - 0.5f); 
+                        colorG = 6.0f * (normalizedIter - 0.2f); 
                         if (colorG > 1.0f) {
                             colorG = 1.0f; 
                         }
                     }
-                    colorB = 1.0f - normalizedIter; 
+                    colorB = 6.0f - normalizedIter; 
 
                     glColor3f(colorR, colorG, colorB);
                 }
@@ -368,7 +368,7 @@ public:
         v.deseneaza(p, lungime);
 
         p = v.getDest(p, lungime);
-        lungime *= raport;
+        //lungime *= raport;
         v.rotatie(25);
         v.deseneaza(p, lungime);
         p1 = v.getDest(p, lungime);
@@ -420,7 +420,7 @@ void Display2() {
     if (nivel > 6) nivel = 0;
     CSquareFractal csf;
     
-    csf.afisare(0.5, nivel, 0.4);
+    csf.afisare(0.5, nivel, 0.35);
     glColor3f(1.0f, 0.0f, 0.0f); 
 
     float minX = -0.8f, minY = -0.8f; 
